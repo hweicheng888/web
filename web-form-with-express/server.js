@@ -47,7 +47,7 @@ app.post("/databases", async function (request, response) {
 
 // Create new page. The database ID is provided in the web form.
 app.post("/pages", async function (request, response) {
-  const { pageName, header } = request.body
+  const { pageName,email, header } = request.body
   const dbID = process.env.NOTION_DATABASE_ID
   try {
     const newPage = await notion.pages.create({
@@ -65,7 +65,9 @@ app.post("/pages", async function (request, response) {
             },
           ],
         },
-
+        Email: {
+          email:email,
+        },
       },
       children: [
         {
